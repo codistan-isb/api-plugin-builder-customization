@@ -1,0 +1,97 @@
+enum dropDownOrInput {
+  INPUT
+  DROPDOWN
+}
+
+type CustomizationKeyValue implements Node {
+  _id: ID!
+
+  name: String
+
+  prefix: String
+
+  price: Float
+
+  image: String
+
+  inputType: dropDownOrInput
+
+  dependentCustomizationKeyValueIds: [ID]
+
+  # dependentCustomizationKeyValueInfo: [CustomizationKeyValue]
+}
+
+type Customization implements Node {
+  "ID for main customization which is in products"
+  _id: ID!
+
+  customizationName: String
+
+  description: String
+
+  dependentCustomizationID: String
+
+  customizationKeyValueIds: [ID]
+
+  productId: String
+
+  customizationKeyValueInfo: [CustomizationKeyValue]
+}
+
+input createCustomizationInput {
+  customizationName: String
+
+  description: String
+
+  dependentCustomizationID: String
+
+  inputType: dropDownOrInput
+
+  productId: ID
+}
+
+input createCustomizationKeyValueInput {
+  name: String
+
+  prefix: String
+
+  price: Float
+
+  image: String
+
+  dependentCustomizationKeyValueIds: [ID]
+}
+
+input createCustomization {
+  customization: createCustomizationInput
+  customizationKeyValue: createCustomizationKeyValueInput
+}
+
+type createCustomizationPayload {
+  check: Boolean
+}
+
+# input createCustomizationInput {
+#   start: Boolean
+# }
+
+input createCustomizationKeyValue {
+  customizationId: ID
+  customizationKeyValue: createCustomizationKeyValueInput
+}
+
+type createCustomizationKeyValuePayload {
+  check: Boolean
+}
+
+type Mutation {
+  createCustomization(input: createCustomization!): createCustomizationPayload
+  createCustomizationKeyValue(
+    input: createCustomizationKeyValue!
+  ): createCustomizationKeyValuePayload
+  #   updateQuote(input: updateInput): Boolean
+}
+
+type Query {
+  customizations(prodId: ID): [Customization]
+}
