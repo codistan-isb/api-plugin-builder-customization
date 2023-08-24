@@ -45,8 +45,6 @@ input createCustomizationInput {
 
   dependentCustomizationID: String
 
-  inputType: dropDownOrInput
-
   productId: ID
 }
 
@@ -56,6 +54,7 @@ input createCustomizationKeyValueInput {
   prefix: String
 
   price: Float
+  inputType: dropDownOrInput
 
   image: String
 
