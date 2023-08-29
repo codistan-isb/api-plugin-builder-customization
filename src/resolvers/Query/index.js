@@ -1,5 +1,9 @@
-import customizations from "./customizations.js";
+import customization from "./customization.js";
+import sortedCustomizations from "./sortedCustomizations.js";
+import customizationKeyValues from "./customizationKeyValues.js";
 
 export default {
-  customizations,
+  customization,
+  sortedCustomizations,
+  customizationKeyValues,
 };

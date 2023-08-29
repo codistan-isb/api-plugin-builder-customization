@@ -35,6 +35,8 @@ type Customization implements Node {
 
   productId: String
 
+  orderCustomization: Float
+
   customizationKeyValueInfo: [CustomizationKeyValue]
 }
 
@@ -45,6 +47,8 @@ input createCustomizationInput {
 
   dependentCustomizationID: String
 
+  orderCustomization: Float
+
   productId: ID
 }
 
@@ -54,6 +58,7 @@ input createCustomizationKeyValueInput {
   prefix: String
 
   price: Float
+
   inputType: dropDownOrInput
 
   image: String
@@ -92,5 +97,10 @@ type Mutation {
 }
 
 type Query {
-  customizations(prodId: ID): [Customization]
+  customization(custId: ID): Customization
+  sortedCustomizations(prodId: ID): [String]
+  customizationKeyValues(
+    customizationKeyValueArray: [ID]
+    selectedDependentCustomizationKeyValue: String
+  ): [CustomizationKeyValue]
 }
