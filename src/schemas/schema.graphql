@@ -64,6 +64,9 @@ input createCustomizationKeyValueInput {
   image: String
 
   dependentCustomizationKeyValueIds: [ID]
+
+  # From 0 to 2200 Psi
+  customRange:String
 }
 
 input createCustomization {
@@ -81,7 +84,7 @@ type createCustomizationPayload {
 
 input createCustomizationKeyValue {
   customizationId: ID
-  customizationKeyValue: createCustomizationKeyValueInput
+  customizationKeyValue: [createCustomizationKeyValueInput]
 }
 
 type createCustomizationKeyValuePayload {
@@ -91,6 +94,9 @@ type createCustomizationKeyValuePayload {
 type Mutation {
   createCustomization(input: createCustomization!): createCustomizationPayload
   createCustomizationKeyValue(
+    input: createCustomizationKeyValue!
+  ): createCustomizationKeyValuePayload
+    createMultipleCustomizationKeyValue(
     input: createCustomizationKeyValue!
   ): createCustomizationKeyValuePayload
   #   updateQuote(input: updateInput): Boolean

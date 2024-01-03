@@ -5,17 +5,13 @@ import decodeOpaqueId from "@reactioncommerce/api-utils/decodeOpaqueId.js";
 // import { decodeProductOpaqueId, decodeShopOpaqueId } from "../xforms/id.js";
 // import { encodeProductOpaqueId } from "../xforms/id.js";
 
-export default async function createCustomization(context, input) {
+export default async function (context, input) {
   // inputSchema.validate(input);
 
   const { appEvents, collections, simpleSchemas } = context;
   const { Product } = simpleSchemas;
   const { Customizations, CustomizationKeyValues } = collections;
-  //const { product: productInput, shopId, shouldCreateFirstVariant = true } = input;
   const {
-    shopId,
-    serviceProductId,
-    variant,
     customization,
     customizationKeyValue,
   } = input;
@@ -25,6 +21,8 @@ export default async function createCustomization(context, input) {
   let data1 = {
     _id: ckvId,
     ...customizationKeyValue,
+    updatedAt: new Date(),
+    createdAt: new Date(),
   };
 
   console.log("in inner function ", customization, customizationKeyValue);
@@ -33,7 +31,7 @@ export default async function createCustomization(context, input) {
     data1
   );
 
-  console.log("Added Customization key value is ", addedCustomizationKeyValues);
+  console.log("Added Customization key value is :- ", addedCustomizationKeyValues);
 
   if (addedCustomizationKeyValues?.result?.ok) {
     let arr = [];
@@ -43,6 +41,8 @@ export default async function createCustomization(context, input) {
       _id: Random.id(),
       ...customization,
       customizationKeyValueIds: arr,
+      updatedAt: new Date(),
+      createdAt: new Date(),
     };
 
     let addedCustomization = await Customizations.insertOne(data);

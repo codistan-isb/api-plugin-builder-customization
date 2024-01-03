@@ -33,6 +33,7 @@ export default async function createCustomizationKeyValue(context, input) {
     let data1 = {
       _id: ckvId,
       ...customizationKeyValue,
+      updatedAt: new Date(),
     };
 
     let addedCustomizationKeyValues = await CustomizationKeyValues.insertOne(
@@ -44,15 +45,19 @@ export default async function createCustomizationKeyValue(context, input) {
       addedCustomizationKeyValues
     );
 
-    let arr = findCustomization.customizationKeyValueIds;
-    arr.push(ckvId);
-
+    let arr = findCustomization?.customizationKeyValueIds;
+    if (arr) {
+      arr.push(ckvId);
+    } else {
+      arr = [];
+      arr.push(ckvId);
+    }
     let updatedCustomization = await Customizations.findOneAndUpdate(
       {
         _id: customizationId,
       },
       {
-        $set: { customizationKeyValueIds: arr },
+        $set: { customizationKeyValueIds: arr, updatedAt: new Date() },
       },
       { new: true }
     );
