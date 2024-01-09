@@ -18,6 +18,8 @@ type CustomizationKeyValue implements Node {
 
   dependentCustomizationKeyValueIds: [ID]
 
+  customRange: String
+
   # dependentCustomizationKeyValueInfo: [CustomizationKeyValue]
 }
 
@@ -39,15 +41,15 @@ type Customization implements Node {
 
   customizationKeyValueInfo: [CustomizationKeyValue]
 }
-type CustomizationKeyValuePayload{
+type CustomizationKeyValuePayload {
   _id: ID!
   customizationName: String
   description: String
   orderCustomization: String
-  productId:ID
+  productId: ID
   customizationKeyValueIds: [ID]
-  updatedAt:DateTime
-  createdAt:DateTime
+  updatedAt: DateTime
+  createdAt: DateTime
   customizationKeyValueInfo: [CustomizationKeyValue]
 }
 input createCustomizationInput {
@@ -76,7 +78,7 @@ input createCustomizationKeyValueInput {
   dependentCustomizationKeyValueIds: [ID]
 
   # From 0 to 2200 Psi
-  customRange:String
+  customRange: String
 }
 
 input createCustomization {
@@ -106,7 +108,7 @@ type Mutation {
   createCustomizationKeyValue(
     input: createCustomizationKeyValue!
   ): createCustomizationKeyValuePayload
-    createMultipleCustomizationKeyValue(
+  createMultipleCustomizationKeyValue(
     input: createCustomizationKeyValue!
   ): createCustomizationKeyValuePayload
   #   updateQuote(input: updateInput): Boolean
@@ -119,7 +121,5 @@ type Query {
     customizationKeyValueArray: [ID]
     selectedDependentCustomizationKeyValue: String
   ): [CustomizationKeyValue]
-  nonDependentCustomizations(
-    variantId: ID
-  ): [CustomizationKeyValuePayload]
+  nonDependentCustomizations(variantId: ID): [CustomizationKeyValuePayload]
 }
