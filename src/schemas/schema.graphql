@@ -39,7 +39,17 @@ type Customization implements Node {
 
   customizationKeyValueInfo: [CustomizationKeyValue]
 }
-
+type CustomizationKeyValuePayload{
+  _id: ID!
+  customizationName: String
+  description: String
+  orderCustomization: String
+  productId:ID
+  customizationKeyValueIds: [ID]
+  updatedAt:DateTime
+  createdAt:DateTime
+  customizationKeyValueInfo: [CustomizationKeyValue]
+}
 input createCustomizationInput {
   customizationName: String
 
@@ -109,4 +119,7 @@ type Query {
     customizationKeyValueArray: [ID]
     selectedDependentCustomizationKeyValue: String
   ): [CustomizationKeyValue]
+  nonDependentCustomizations(
+    variantId: ID
+  ): [CustomizationKeyValuePayload]
 }
