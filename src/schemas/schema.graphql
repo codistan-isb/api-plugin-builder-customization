@@ -1,6 +1,7 @@
 enum dropDownOrInput {
   INPUT
   DROPDOWN
+  CHECKBOX
 }
 
 type CustomizationKeyValue implements Node {
@@ -18,8 +19,21 @@ type CustomizationKeyValue implements Node {
 
   dependentCustomizationKeyValueIds: [ID]
 
+  customMinRange: String
+
+  customMaxRange: String
+
   customRange: String
 
+  isDisabled: Boolean
+
+  isCustom: Boolean
+
+  customFieldDescription: String
+
+  customNote: String
+
+  placeValue: Float
   # dependentCustomizationKeyValueInfo: [CustomizationKeyValue]
 }
 
@@ -40,6 +54,8 @@ type Customization implements Node {
   orderCustomization: Float
 
   customizationKeyValueInfo: [CustomizationKeyValue]
+
+  images: [String]
 }
 type CustomizationKeyValuePayload {
   _id: ID!
@@ -62,6 +78,8 @@ input createCustomizationInput {
   orderCustomization: Float
 
   productId: ID
+
+  images: [String]
 }
 
 input createCustomizationKeyValueInput {
@@ -77,7 +95,21 @@ input createCustomizationKeyValueInput {
 
   dependentCustomizationKeyValueIds: [ID]
 
+  isCustom: Boolean
+
+  customFieldDescription: String
+
   # From 0 to 2200 Psi
+  customMinRange: String
+
+  customMaxRange: String
+
+  isDisabled: Boolean
+
+  customNote: String
+
+  placeValue: Float
+
   customRange: String
 }
 
