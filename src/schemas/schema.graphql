@@ -58,6 +58,21 @@ type Customization implements Node {
   images: [String]
 }
 type CustomizationKeyValuePayload {
+  _id: ID
+  customizationName: String
+  description: String
+  orderCustomization: String
+  productId: ID
+  customizationKeyValueIds: [ID]
+  updatedAt: DateTime
+  createdAt: DateTime
+  customizationKeyValueInfo: [CustomizationKeyValue]
+}
+type nonDependentCustomizationsPayload {
+  totalCount: Int
+  nonDependentCustomizations: nonDependentCustomizationsValue
+}
+type nonDependentCustomizationsValue {
   _id: ID!
   customizationName: String
   description: String
@@ -153,5 +168,5 @@ type Query {
     customizationKeyValueArray: [ID]
     selectedDependentCustomizationKeyValue: String
   ): [CustomizationKeyValue]
-  nonDependentCustomizations(variantId: ID): [CustomizationKeyValuePayload]
+  nonDependentCustomizations(variantId: ID): nonDependentCustomizationsPayload
 }

@@ -13,7 +13,7 @@ export default async function customizationKeyValues(
     selectedDependentCustomizationKeyValue
   );
 
-  console.log("Array is ", customizationKeyValueArray);
+  // console.log("Array is ", customizationKeyValueArray);
   let keyValues = [];
   if (selectedDependentCustomizationKeyValue) {
     keyValues = await CustomizationKeyValues.find({
