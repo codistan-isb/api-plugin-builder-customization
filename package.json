@@ -1,8 +1,8 @@
 {
-  "name": "@awahab1116/api-plugin-builder-customization",
-  "description": "Boilerplate Example plugin for the Reaction API",
-  "label": "Example Plugin",
-  "version": "16.29.11-development",
+  "name": "@codistan-isb/api-plugin-builder-customization",
+  "description": "Builder Customization Plugin for the Reaction API",
+  "label": "Builder Customization Plugin",
+  "version": "16.29.12",
   "main": "index.js",
   "type": "module",
   "engines": {

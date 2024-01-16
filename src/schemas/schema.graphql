@@ -58,7 +58,7 @@ type Customization implements Node {
   images: [String]
 }
 type CustomizationKeyValuePayload {
-  _id: ID
+  _id: ID!
   customizationName: String
   description: String
   orderCustomization: String
@@ -70,10 +70,10 @@ type CustomizationKeyValuePayload {
 }
 type nonDependentCustomizationsPayload {
   totalCount: Int
-  nonDependentCustomizations: nonDependentCustomizationsValue
+  data: [CustomizationKeyValuePayload]
 }
 type nonDependentCustomizationsValue {
-  _id: ID!
+  _id: ID
   customizationName: String
   description: String
   orderCustomization: String
