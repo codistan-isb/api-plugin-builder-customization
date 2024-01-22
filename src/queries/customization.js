@@ -3,7 +3,7 @@ export default async function customization(context, { custId } = {}) {
   const { Product } = simpleSchemas;
   const { Customizations: modelCustomizations } = collections;
 
-  console.log("In query inner function ", custId);
+  console.log("In query inner function", custId);
 
   const data = await modelCustomizations.findOne({ _id: custId });
 

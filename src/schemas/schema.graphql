@@ -149,7 +149,10 @@ input createCustomizationKeyValue {
 type createCustomizationKeyValuePayload {
   check: Boolean
 }
-
+type CustomizationPayload {
+  totalCount: Int
+  data: [Customization]
+}
 type Mutation {
   createCustomization(input: createCustomization!): createCustomizationPayload
   createCustomizationKeyValue(
@@ -169,4 +172,5 @@ type Query {
     selectedDependentCustomizationKeyValue: String
   ): [CustomizationKeyValue]
   nonDependentCustomizations(variantId: ID): nonDependentCustomizationsPayload
+  getAllcustomizations(itemPerPage: Int, PageNumber: Int): CustomizationPayload
 }

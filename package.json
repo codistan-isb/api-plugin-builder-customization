@@ -2,7 +2,7 @@
   "name": "@codistan-isb/api-plugin-builder-customization",
   "description": "Builder Customization Plugin for the Reaction API",
   "label": "Builder Customization Plugin",
-  "version": "16.29.12",
+  "version": "16.29.13",
   "main": "index.js",
   "type": "module",
   "engines": {
