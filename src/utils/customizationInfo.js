@@ -10,7 +10,7 @@ export default async function customizationInfo(
 
   //   console.log("in vehicle reslover function");
 
-  //   console.log("arguments are ", args);
+  console.log("arguments are ", args);
 
   const customData = await CustomizationKeyValues.find({
     _id: { $in: cdvIds },
