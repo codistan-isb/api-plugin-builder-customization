@@ -58,7 +58,7 @@ type Customization implements Node {
   images: [String]
 }
 type CustomizationKeyValuePayload {
-  _id: ID!
+  _id: ID
   customizationName: String
   description: String
   orderCustomization: String

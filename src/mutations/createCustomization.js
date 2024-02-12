@@ -2,19 +2,15 @@ import SimpleSchema from "simpl-schema";
 import Random from "@reactioncommerce/random";
 import ReactionError from "@reactioncommerce/reaction-error";
 import decodeOpaqueId from "@reactioncommerce/api-utils/decodeOpaqueId.js";
-// import { decodeProductOpaqueId, decodeShopOpaqueId } from "../xforms/id.js";
-// import { encodeProductOpaqueId } from "../xforms/id.js";
+import { decodeProductOpaqueId } from "../xforms/id.js";
 
-export default async function createCustomization (context, input) {
+export default async function createCustomization(context, input) {
   // inputSchema.validate(input);
 
   const { appEvents, collections, simpleSchemas } = context;
   const { Product } = simpleSchemas;
   const { Customizations, CustomizationKeyValues } = collections;
-  const {
-    customization,
-    customizationKeyValue,
-  } = input;
+  const { customization, customizationKeyValue } = input;
 
   let ckvId = Random.id();
 
@@ -31,7 +27,10 @@ export default async function createCustomization (context, input) {
     data1
   );
 
-  console.log("Added Customization key value is :- ", addedCustomizationKeyValues);
+  console.log(
+    "Added Customization key value is :- ",
+    addedCustomizationKeyValues
+  );
 
   if (addedCustomizationKeyValues?.result?.ok) {
     let arr = [];
@@ -39,6 +38,7 @@ export default async function createCustomization (context, input) {
 
     let data = {
       _id: Random.id(),
+      productId: decodeProductOpaqueId(customization?.productId),
       ...customization,
       customizationKeyValueIds: arr,
       updatedAt: new Date(),
