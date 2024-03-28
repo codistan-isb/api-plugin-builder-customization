@@ -12,43 +12,82 @@ export default async function createCustomization(context, input) {
   const { Customizations, CustomizationKeyValues } = collections;
   const { customization, customizationKeyValue } = input;
 
-  let ckvId = Random.id();
+  let arr = [];
+  if (customizationKeyValue.length > 0) {
+    for (let index = 0; index < customizationKeyValue?.length; index++) {
+      let ckvId = Random.id();
+      let element = customizationKeyValue[index];
+      let data1 = {
+        _id: ckvId,
+        ...element,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+      };
 
-  let data1 = {
-    _id: ckvId,
-    ...customizationKeyValue,
+      // console.log("in inner function ", customization, customizationKeyValue);
+
+      let addedCustomizationKeyValues = await CustomizationKeyValues.insertOne(
+        data1
+      );
+
+      console.log(
+        "Added Customization key value is :- ",
+        addedCustomizationKeyValues?.result?.ok
+      );
+
+      if (addedCustomizationKeyValues?.result?.ok) {
+        arr.push(ckvId);
+
+        console.log("arr in loop ", arr);
+      }
+    }
+  }
+  console.log("arr after loop ", arr);
+  let data = {
+    _id: Random.id(),
+    productId: decodeProductOpaqueId(customization?.productId),
+    ...customization,
+    customizationKeyValueIds: arr,
     updatedAt: new Date(),
     createdAt: new Date(),
   };
 
-  console.log("in inner function ", customization, customizationKeyValue);
+  let addedCustomization = await Customizations.insertOne(data);
+  // let data1 = {
+  //   _id: ckvId,
+  //   ...customizationKeyValue,
+  //   updatedAt: new Date(),
+  //   createdAt: new Date(),
+  // };
 
-  let addedCustomizationKeyValues = await CustomizationKeyValues.insertOne(
-    data1
-  );
+  // console.log("in inner function ", customization, customizationKeyValue);
 
-  console.log(
-    "Added Customization key value is :- ",
-    addedCustomizationKeyValues
-  );
+  // let addedCustomizationKeyValues = await CustomizationKeyValues.insertOne(
+  //   data1
+  // );
 
-  if (addedCustomizationKeyValues?.result?.ok) {
-    let arr = [];
-    arr.push(ckvId);
+  // console.log(
+  //   "Added Customization key value is :- ",
+  //   addedCustomizationKeyValues
+  // );
 
-    let data = {
-      _id: Random.id(),
-      productId: decodeProductOpaqueId(customization?.productId),
-      ...customization,
-      customizationKeyValueIds: arr,
-      updatedAt: new Date(),
-      createdAt: new Date(),
-    };
+  // if (addedCustomizationKeyValues?.result?.ok) {
+  //   let arr = [];
+  //   arr.push(ckvId);
 
-    let addedCustomization = await Customizations.insertOne(data);
+  //   let data = {
+  //     _id: Random.id(),
+  //     productId: decodeProductOpaqueId(customization?.productId),
+  //     ...customization,
+  //     customizationKeyValueIds: arr,
+  //     updatedAt: new Date(),
+  //     createdAt: new Date(),
+  //   };
 
-    console.log("Added Customization is ", addedCustomization);
-  }
+  //   let addedCustomization = await Customizations.insertOne(data);
+
+  //   console.log("Added Customization is ", addedCustomization);
+  // }
 
   return {
     check: true,

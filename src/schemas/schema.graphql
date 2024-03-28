@@ -130,7 +130,7 @@ input createCustomizationKeyValueInput {
 
 input createCustomization {
   customization: createCustomizationInput
-  customizationKeyValue: createCustomizationKeyValueInput
+  customizationKeyValue: [createCustomizationKeyValueInput]
 }
 
 type createCustomizationPayload {
