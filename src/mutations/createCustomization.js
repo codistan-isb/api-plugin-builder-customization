@@ -20,6 +20,8 @@ export default async function createCustomization(context, input) {
       let data1 = {
         _id: ckvId,
         ...element,
+        isVisible:true,
+        isDeleted:false,
         updatedAt: new Date(),
         createdAt: new Date(),
       };
@@ -48,6 +50,8 @@ export default async function createCustomization(context, input) {
     productId: decodeProductOpaqueId(customization?.productId),
     ...customization,
     customizationKeyValueIds: arr,
+    isVisible:true,
+    isDeleted:false,
     updatedAt: new Date(),
     createdAt: new Date(),
   };

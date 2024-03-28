@@ -32,6 +32,8 @@ export default async function createMultipleCustomizationKeyValue(
       let data = {
         _id: ckvId,
         ...element,
+        isVisible: true,
+        isDeleted: false,
         updatedAt: new Date(),
         createdAt: new Date(),
       };
@@ -46,19 +48,19 @@ export default async function createMultipleCustomizationKeyValue(
         arr = [];
         arr.push(ckvId);
       }
-    } 
+    }
   }
   console.log("arr", arr);
-    updatedCustomization = await Customizations.findOneAndUpdate(
-      {
-        _id: customizationId,
-      },
-      {
-        $set: { customizationKeyValueIds: arr, updatedAt: new Date() },
-      },
-      { new: true }
-    );
-    console.log("updatedCustomization", updatedCustomization.ok);
+  updatedCustomization = await Customizations.findOneAndUpdate(
+    {
+      _id: customizationId,
+    },
+    {
+      $set: { customizationKeyValueIds: arr, updatedAt: new Date() },
+    },
+    { new: true }
+  );
+  console.log("updatedCustomization", updatedCustomization.ok);
   if (updatedCustomization) {
     return true;
   } else {
