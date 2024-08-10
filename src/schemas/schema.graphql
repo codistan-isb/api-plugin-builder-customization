@@ -97,6 +97,21 @@ input createCustomizationInput {
   images: [String]
 }
 
+input updateCustomizationInput {
+  _id: String!
+  customizationName: String
+
+  description: String
+
+  dependentCustomizationID: String
+
+  orderCustomization: Float
+
+  productId: ID
+
+  images: [String]
+}
+
 input createCustomizationKeyValueInput {
   name: String
 
@@ -128,10 +143,51 @@ input createCustomizationKeyValueInput {
   customRange: String
 }
 
+
+input updateCustomizationKeyValueInput {
+
+  _id: String
+  name: String
+
+  prefix: String
+
+  price: Float
+
+  inputType: dropDownOrInput
+
+  image: String
+
+  dependentCustomizationKeyValueIds: [ID]
+
+  isCustom: Boolean
+
+  customFieldDescription: String
+
+  # From 0 to 2200 Psi
+  customMinRange: String
+
+  customMaxRange: String
+
+  isDisabled: Boolean
+
+  customNote: String
+
+  placeValue: Float
+
+  customRange: String
+}
+
+
 input createCustomization {
   customization: createCustomizationInput
   customizationKeyValue: [createCustomizationKeyValueInput]
 }
+
+input updateCustomization {
+  updateCustomization: updateCustomizationInput
+  updateCustomizationKeyValue: [updateCustomizationKeyValueInput]
+}
+
 
 type createCustomizationPayload {
   check: Boolean
@@ -162,6 +218,8 @@ type Mutation {
     input: createCustomizationKeyValue!
   ): createCustomizationKeyValuePayload
   #   updateQuote(input: updateInput): Boolean
+
+  updateCustomization(input: updateCustomization!): Boolean
 }
 
 type Query {
